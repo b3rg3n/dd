@@ -11,7 +11,7 @@ screen sosok1_main_menu():
     tag menu
 
     imagebutton auto "images/menu/so_start_%s.png" xpos -190 ypos -50 focus_mask True action Jump("sosok1_start_mode")
-    imagebutton auto "images/menu/so_exit_%s.png" xpos -180 ypos 150 focus_mask True action Jump("skitovijexit")#Quit(confirm=not main_menu)
+    imagebutton auto "images/menu/so_exit_%s.png" xpos -180 ypos 250 focus_mask True action Jump("skitovijexit")#Quit(confirm=not main_menu)
 
 label sosok1_start_mode:
     $ renpy.block_rollback()

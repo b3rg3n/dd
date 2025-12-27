@@ -1,40 +1,14 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 define config.name = _("Dmitry Diary")
-
-
-
-
-
 define gui.show_name = False
 
-
-
-
-define config.version = "2.2.8"
-
-
-
-
+define config.version = "1.2"
 
 define gui.about = _p("""
 Кликабельные ссылки:
 
-Автор - {a=https://t.me/b3rg3n}BERGEN{/a}.
+Автор - {a=https://t.me/viva_la_razumizm}BERGEN{/a}.
 
-Канал - {a=https://t.me/bergenhub}SR's aesthetics{/a}.
+Канал - {a=https://t.me/SkeetDynasty}Skeet Dynasty{/a}.
 
 Это моя последняя рефлексия - аж 3 истории про BeerdMANNа, Skittels15, Morerator-bot, доберманчике да и просто о Дмитрии Скитецком.
 
@@ -43,73 +17,22 @@ define gui.about = _p("""
 Правда?
 """)
 
-
-
-
-
-
 define build.name = "DmitryDiary"
-
-
-
-
-
-
-
 
 define config.has_sound = True
 define config.has_music = True
 define config.has_voice = False
 
-
-
-
-
 define config.sample_sound = "audio/kashel.ogg"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 define config.enter_transition = dissolve
 define config.exit_transition = dissolve
 
-
-
-
 define config.intra_transition = dissolve
 
+define config.after_load_transition = dissolve
 
-
-
-define config.after_load_transition = None
-
-
-
-
-define config.end_game_transition = None
-
-
-
-
-
-
-
-
-
+define config.end_game_transition = dissolve
 
 
 
@@ -207,10 +130,8 @@ init python:
     build.classify('game/**.rpy', 'archive')
     build.classify('game/**.rpyc', 'archive')
     build.classify('game/**.webm', 'archive')
-
-
+    build.classify('game/**.ttf', 'archive')
+    build.classify('game/**.otf', 'archive')
 
     build.documentation('*.html')
     build.documentation('*.txt')
-
-  # Decompiled by unrpyc_v1.2.0-alpha: https://github.com/CensoredUsername/unrpyc

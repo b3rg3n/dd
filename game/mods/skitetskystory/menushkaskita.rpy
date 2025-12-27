@@ -12,7 +12,7 @@ screen skit_main_menu():
     tag menu
 
     imagebutton auto "images/menu/skit_start_%s.png" xpos -190 ypos -50 focus_mask True action Jump("skitovij_start_mode")
-    imagebutton auto "images/menu/so_exit_%s.png" xpos -180 ypos 150 focus_mask True action Jump("skitovijexit")
+    imagebutton auto "images/menu/so_exit_%s.png" xpos -180 ypos 250 focus_mask True action Jump("skitovijexit")
 
 label skitovij_start_mode:
     $ renpy.block_rollback()

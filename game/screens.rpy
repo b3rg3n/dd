@@ -321,11 +321,7 @@ init -501 screen navigation():
 
         textbutton _("Инфо") action ShowMenu("about")
 
-        if renpy.variant("pc"):
-
-
-
-            textbutton _("Ливнуть") action Quit(confirm=not main_menu)
+        textbutton _("Ливнуть") action Quit(confirm=not main_menu)
 
 
 init -1 style navigation_button is gui_button
@@ -923,7 +919,7 @@ init -501 screen history():
                     substitute False
 
         if not _history_list:
-            label _("История диалогов пуста.")
+            label _("Тут нихуя нету.")
 
 
 
@@ -979,171 +975,38 @@ init -1 style history_label_text:
 
 
 init -501 screen help():
-    tag menu
+    predict False tag menu
 
+    use game_menu(_("История"), scroll=("vpgrid" if gui.history_height else "viewport"), yinitial=1.0):
 
-    default device = "keyboard"
+        style_prefix "history"
 
-    use game_menu(_("Хэлпа"), scroll="viewport"):
+        for h in _history_list:
 
-        style_prefix "help"
-
-        vbox:
-            spacing 23
-
-            hbox:
-
-                textbutton _("Клавиатура") action SetScreenVariable("device", "keyboard")
-                textbutton _("Мышь") action SetScreenVariable("device", "mouse")
-
-                if GamepadExists():
-                    textbutton _("Геймпад") action SetScreenVariable("device", "gamepad")
-
-            if device == "keyboard":
-                use keyboard_help
-            elif device == "mouse":
-                use mouse_help
-            elif device == "gamepad":
-                use gamepad_help
-
-
-init -501 screen keyboard_help():
-
-    hbox:
-        label _("Enter")
-        text _("Прохождение диалогов, активация интерфейса.")
-
-    hbox:
-        label _("Пробел")
-        text _("Прохождение диалогов без возможности делать выбор.")
-
-    hbox:
-        label _("Стрелки")
-        text _("Навигация по интерфейсу.")
-
-    hbox:
-        label _("Esc")
-        text _("Вход в игровое меню.")
-
-    hbox:
-        label _("Ctrl")
-        text _("Пропускает диалоги, пока зажат.")
-
-    hbox:
-        label _("Tab")
-        text _("Включает режим пропуска.")
-
-    hbox:
-        label _("Page Up")
-        text _("Откат назад по сюжету игры.")
-
-    hbox:
-        label _("Page Down")
-        text _("Откатывает предыдущее действие вперёд.")
-
-    hbox:
-        label "H"
-        text _("Скрывает интерфейс пользователя.")
-
-    hbox:
-        label "S"
-        text _("Делает снимок экрана.")
-
-    hbox:
-        label "V"
-        text _("Включает поддерживаемый {a=https://www.renpy.org/l/voicing}синтезатор речи{/a}.")
-
-    hbox:
-        label "Shift+A"
-        text _("Открывает меню специальных возможностей.")
-
-
-init -501 screen mouse_help():
-
-    hbox:
-        label _("Левый клик")
-        text _("Прохождение диалогов, активация интерфейса.")
-
-    hbox:
-        label _("Клик колёсиком")
-        text _("Скрывает интерфейс пользователя.")
-
-    hbox:
-        label _("Правый клик")
-        text _("Вход в игровое меню.")
-
-    hbox:
-        label _("Колёсико вверх\nКлик на сторону отката")
-        text _("Откат назад по сюжету игры.")
-
-    hbox:
-        label _("Колёсико вниз")
-        text _("Откатывает предыдущее действие вперёд.")
-
-
-init -501 screen gamepad_help():
-
-    hbox:
-        label _("Правый триггер\nA/Нижняя кнопка")
-        text _("Прохождение диалогов, активация интерфейса.")
-
-    hbox:
-        label _("Левый Триггер\nЛевый Бампер")
-        text _("Откат назад по сюжету игры.")
-
-    hbox:
-        label _("Правый бампер")
-        text _("Откатывает предыдущее действие вперёд.")
-
-
-    hbox:
-        label _("Крестовина, Стики")
-        text _("Навигация по интерфейсу.")
-
-    hbox:
-        label _("Start, Guide")
-        text _("Вход в игровое меню.")
-
-    hbox:
-        label _("Y/Верхняя кнопка")
-        text _("Скрывает интерфейс пользователя.")
-
-    textbutton _("Калибровка") action GamepadCalibrate()
-
-
-init -1 style help_button is gui_button
-init -1 style help_button_text is gui_button_text
-init -1 style help_label is gui_label
-init -1 style help_label_text is gui_label_text
-init -1 style help_text is gui_text
-
-init -1 style help_button:
-    properties gui.button_properties("help_button")
-    xmargin 12
-
-init -1 style help_button_text:
-    properties gui.button_text_properties("help_button")
-
-init -1 style help_label:
-    xsize 375
-    right_padding 30
-
-init -1 style help_label_text:
-    size gui.text_size
-    xalign 1.0
-    text_align 1.0
+            window:
 
 
 
+                has fixed:
+                    yfit True
+
+                if h.who:
+
+                    label h.who:
+                        style "history_name"
+                        substitute False
 
 
 
+                        if "color" in h.who_args:
+                            text_color h.who_args["color"]
 
+                $ what = renpy.filter_text_tags(h.what, allow=gui.history_allow_tags)
+                text what:
+                    substitute False
 
-
-
-
-
+        if not _history_list:
+            label _("Тут нихуя нету.")
 
 
 
